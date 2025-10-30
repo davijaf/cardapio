@@ -50,6 +50,63 @@
 - Java 25 (demonstration purpose)
 - Gradle (build tool)
 - Gson (JSON serialization)
+- HttpServer (com.sun.net.httpserver) - Simple HTTP server
+- ServerSocket/Socket - TCP networking
+
+## Network Programming Features
+
+### HTTP Server (`ServidorItensCardapio`)
+- Simple HTTP server using `com.sun.net.httpserver.HttpServer`
+- Serves menu items as JSON via REST endpoint
+- Runs on port 8000 at `/itens-cardapio`
+- Reads and serves the `cardapio.json` file
+- Returns proper `Content-Type: application/json` headers
+
+### HTTP Server with ServerSocket (`ServidorItensCardapioComSocket`)
+- Manual HTTP server implementation using low-level `ServerSocket`
+- Demonstrates raw TCP socket programming
+- Opens port 8000 and accepts client connections
+- Reads bytes directly from `InputStream`
+- Stores data in `StringBuilder` byte by byte
+- Shows received data as numeric byte values
+- Educational example showing the need for proper character encoding
+- Illustrates the difference between bytes and characters in network communication
+
+### HTTP Client (`ClientLocalhostCardapio`)
+- Consumes the HTTP server endpoint
+- Fetches menu items from `http://localhost:8000/itens-cardapio`
+- Demonstrates HTTP GET requests in Java
+
+### TCP Protocol Demonstration
+Three classes to illustrate low-level TCP networking:
+
+1. **`ServidorTCPManual`** - TCP Server Implementation
+   - Uses `ServerSocket` to listen on port 9000
+   - Accepts client connections with `accept()`
+   - Demonstrates bidirectional communication:
+     - OutputStream (server) → InputStream (client)
+     - InputStream (server) ← OutputStream (client)
+   - Echo server mode with interactive messaging
+   - Reliable, ordered data delivery
+
+2. **`ClienteTCPManual`** - TCP Client Implementation
+   - Connects to server using `Socket`
+   - Sends messages via OutputStream
+   - Receives responses via InputStream
+   - Interactive mode for testing bidirectional communication
+   - Type "SAIR" to disconnect
+
+3. **`DemonstracaoProtocoloTCP`** - Educational TCP Concepts
+   - Visual ASCII diagrams showing ServerSocket ↔ Socket architecture
+   - Explains bidirectional TCP communication flow
+   - Compares TCP vs UDP (DatagramSocket)
+   - Shows code examples and best practices
+   - Highlights TCP features: reliability, ordering, flow control
+
+### JSON Generation (`GeradorItensCardapioJSON`)
+- Generates `cardapio.json` file from database
+- Uses Gson with pretty printing
+- Exports all menu items to JSON format
 
 ## How to Run
 
@@ -62,6 +119,42 @@
 	 ```sh
 	 ./gradlew run
 	 ```
+
+### Running the HTTP Server
+Start the HTTP server to serve menu items:
+```sh
+./gradlew runServidor
+```
+Access the menu at: `http://localhost:8000/itens-cardapio`
+
+### Running the HTTP Server with ServerSocket (Manual Implementation)
+Start the low-level socket server to see raw byte communication:
+```sh
+./gradlew runServidorSocket
+```
+Then access `http://localhost:8000` in your browser to see how bytes are read from the InputStream.
+
+### Running TCP Demonstrations
+
+**View TCP concepts and diagrams:**
+```sh
+./gradlew runDemonstracaoTCP
+```
+
+**Start TCP server (Terminal 1):**
+```sh
+./gradlew runServidorTCP
+```
+
+**Connect TCP client (Terminal 2):**
+```sh
+./gradlew runClienteTCP
+```
+
+### Generate Menu JSON
+```sh
+./gradlew runGerador
+```
 
 ## Notes
 

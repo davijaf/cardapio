@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "nome": "Sanduíche de Presunto",
+    "descricao": "Sanduíche feito com pão, presunto, queijo, alface e tomate",
+    "categoria": "PRATOS_PRINCIPAIS",
+    "preco": 30.00,
+    "precoComDesconto": 25.00
+  },
+  {
+    "id": 2,
+    "nome": "Refresco do Chaves",
+    "descricao": "Bebida refrescante de limão com hortelã",
+    "categoria": "BEBIDA",
+    "preco": 10.00,
+    "precoComDesconto": 8.00
+  },
+  {
+    "id": 3,
+    "nome": "Brigadeiro",
+    "descricao": "Doce brasileiro feito com leite condensado, chocolate e granulado",
+    "categoria": "SOBREMESA",
+    "preco": 8.00,
+    "precoComDesconto": 7.00
+  },
+  {
+    "id": 4,
+    "nome": "Guacamole",
+    "descricao": "Molho mexicano feito com abacate, tomate, cebola e limão",
+    "categoria": "ENTRADA",
+    "preco": 15.00,
+    "precoComDesconto": 12.00
+  },
+  {
+    "id": 5,
+    "nome": "Cafezinho",
+    "descricao": "Café preto forte, servido em xícara pequena",
+    "categoria": "BEBIDA",
+    "preco": 5.00,
+    "precoComDesconto": 4.00
+  }
+]

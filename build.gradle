@@ -19,3 +19,40 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+task runGerador(type: JavaExec) {
+    mainClass = 'mx.florinda.cardapio.GeradorItensCardapioJSON'
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+task runServidor(type: JavaExec) {
+    mainClass = 'mx.florinda.cardapio.ServidorItensCardapio'
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+task runServidorTCP(type: JavaExec) {
+    mainClass = 'mx.florinda.cardapio.ServidorTCPManual'
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+task runClienteTCP(type: JavaExec) {
+    mainClass = 'mx.florinda.cardapio.ClienteTCPManual'
+    classpath = sourceSets.main.runtimeClasspath
+    standardInput = System.in
+}
+
+task runDemonstracaoTCP(type: JavaExec) {
+    mainClass = 'mx.florinda.cardapio.DemonstracaoProtocoloTCP'
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+task runServidorSocket(type: JavaExec) {
+    mainClass = 'mx.florinda.cardapio.ServidorItensCardapioComSocket'
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+task runClienteSocket(type: JavaExec) {
+    mainClass = 'mx.florinda.cardapio.ClienteItensCardapioComSocket'
+    classpath = sourceSets.main.runtimeClasspath
+}
+
