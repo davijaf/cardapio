@@ -225,3 +225,49 @@ Then access `http://localhost:8000` in your browser to see how bytes are read fr
 - Gradle will be used throughout the extra module of the course
 - Tool highlighted for its flexibility and integration with the Java ecosystem
 - End of lesson and invitation to upcoming videos
+
+## Arquivos modificados e testes
+
+Os arquivos abaixo foram adicionados/alterados recentemente no workspace (veja as attachments):
+
+- `src/main/java/mx/florinda/cardapio/ServidorItensCardapioComSocket.java`
+	- Servidor HTTP manual implementado com `ServerSocket` que aceita conexões na porta 8000.
+	- Implementa endpoints: `GET /itens-cardapio`, `GET /itens-cardapio/total`, `GET /itens-cardapio/{id}`,
+		`POST /itens-cardapio` e `DELETE /itens-cardapio/{id}`.
+	- Usa parsing JSON simples implementado manualmente (sem bibliotecas externas) e envia respostas HTTP manuais.
+
+- `src/main/java/mx/florinda/cardapio/ArrayList.java`
+	- Classe utilitária que retorna um `ConcurrentSkipListMap<Long, ItemCardapio>` para armazenar os itens do cardápio de forma thread-safe.
+	- Explicita vantagens do `ConcurrentSkipListMap` para buscas e remoções por ID (O(log n)).
+
+- `testar_endpoints.sh`
+	- Script Bash para validar automaticamente os endpoints expostos pelo servidor socket.
+	- Testa GET /itens-cardapio, GET /itens-cardapio/total, POST /itens-cardapio, DELETE /itens-cardapio/{id} e cenários de erro.
+
+- `Test Servidor Itens Cardapio com Socker.jmx`
+	- Plano JMeter para testes de carga e automação dos endpoints (arquivo XML do JMeter).
+
+Como testar localmente rapidamente:
+
+1. Compile e rode o servidor manualmente (usando classes compiladas pelo Gradle):
+
+```sh
+./gradlew build
+java -cp build/classes/java/main mx.florinda.cardapio.ServidorItensCardapioComSocket
+```
+
+2. Em outra janela de terminal, torne o script `testar_endpoints.sh` executável e rode-o:
+
+```sh
+chmod +x testar_endpoints.sh
+./testar_endpoints.sh
+```
+
+O script fará várias verificações e exibirá respostas formatadas (se o Python3 estiver disponível será usado `python3 -m json.tool` para pretty-print).
+
+Observações e recomendações:
+
+- O servidor implementado em `ServidorItensCardapioComSocket` faz parsing JSON simples; em produção recomenda-se usar uma biblioteca robusta como Gson ou Jackson para evitar problemas de parsing.
+- O mapa de itens é implementado com `ConcurrentSkipListMap` via a classe `ArrayList` (nome escolhido para compatibilidade com o repositório). Isso garante busca/removal eficientes por ID.
+- Caso queira rodar testes de carga, abra o arquivo `Test Servidor Itens Cardapio com Socker.jmx` no JMeter e execute o plano.
+
